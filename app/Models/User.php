@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
-
+use Firefly\FilamentBlog\Traits\HasBlog;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasBlog;
 
     /**
      * The attributes that are mass assignable.
@@ -52,5 +52,11 @@ class User extends Authenticatable implements FilamentUser
     {
         // return str_ends_with($this->email, '@example.com') && $this->hasVerifiedEmail();
         return true;
+    }
+
+    public function canComment(): bool
+    {
+        // your conditional logic here
+        return false;
     }
 }
